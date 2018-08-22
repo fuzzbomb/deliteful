@@ -82,7 +82,7 @@ define([
 
 		template: template,
 
-		createdCallback: function () {
+		constructor: function () {
 			this.on("click", function (evt) {
 				evt.preventDefault();
 				if (this.disabled) {
@@ -91,13 +91,15 @@ define([
 					evt.stopImmediatePropagation();
 				}
 			}.bind(this));
+		},
 
+		render: dcl.before(function () {
 			// Get label from innerHTML, and then clear it since we are to put the label in a <span>
 			if (!this.label) {
 				this.label = this.textContent.trim();
 				this.innerHTML = "";
 			}
-		},
+		}),
 
 		postRender: function () {
 			// Make SPACE/ENTER key cause button click event.
